@@ -1,0 +1,842 @@
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* página visível por padrão */
+body {
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+/* quando a classe está presente, ficamos ocultos */
+body.fade-out {
+  opacity: 0;
+}
+
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  background: url("Fotos/fundo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #ddd;
+  line-height: 1.6;
+
+}
+
+/* CONTAINER UTIL */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  background: rgba(10, 10, 10, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease, padding 0.3s ease;
+  padding: 30px 0;
+}
+
+.header.shrink {
+  background: rgba(10, 10, 10, 0.8);
+  padding: 15px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Importar a fonte Merriweather */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+/* Estilo para o logo na navbar */
+/* Estilo para o logo na navbar com cor branca */
+.logo {
+  font-family: 'Merriweather', serif;
+  font-size: 2.2rem;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  transition: text-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+/* Efeito ao passar o mouse (hover) */
+.logo:hover {
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+
+/* Navbar responsiva */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-list li {
+  position: relative;
+}
+
+.nav-list a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #ddd;
+  text-decoration: none;
+  padding: 8px 14px;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  /* distância abaixo do texto */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent1);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+  width: 100%;
+}
+
+
+.nav-list a:hover {
+  background-color: rgba(198, 126, 0, 0.2);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(198, 126, 0, 0.3);
+}
+
+.nav-btn {
+  background-color: #c67e00;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #e0a300;
+  color: #000;
+}
+
+/* ============================ */
+/* DIVISA COM ELEMENTO DEDICADO */
+/* ============================ */
+.divider {
+  display: none;
+}
+
+
+/* INTRO PHOTO (corte de baixo) */
+.intro-photo {
+  width: 100%;
+  height: 661px;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: -1px;
+  position: relative;
+}
+
+.intro-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center -255px;
+}
+
+.intro-photo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, .5),
+      rgba(0, 0, 0, 0) 40%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.intro-photo::after {
+  display: none;
+}
+
+
+/* INTRO CAPTION */
+.intro-caption {
+  font-family: 'Cinzel', serif;
+  font-size: 1.7rem;
+  letter-spacing: 6px;
+  color: #fff;
+  text-align: center;
+  margin: 35px 0;
+  position: relative;
+}
+
+.intro-caption::before,
+.intro-caption::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 90px;
+  height: 2px;
+  background: rgba(198, 126, 0, 0.7);
+}
+
+.intro-caption::before {
+  left: 0;
+  transform: translate(-100%, -50%);
+}
+
+.intro-caption::after {
+  right: 0;
+  transform: translate(100%, -50%);
+}
+
+/* BANNERS */
+.banners-section {
+  padding-bottom: 60px;
+}
+
+.banners-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.banner-card {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s;
+}
+
+/* Descer a imagem apenas do Banner 1 */
+.banners-container .banner-card:nth-child(1) {
+  /* experimente valores até achar o ideal */
+  background-position: center 27%;    /* 60% de cima para baixo */
+  /* ou, para usar pixels:
+  background-position-y: -50px;     /* desloca a imagem pra exibir a parte inferior */
+}
+
+/* Seleciona o segundo banner dentro do container */
+.banners-container .banner-card:nth-child(2) {
+  /* controla o zoom da imagem */
+  background-size: 100% auto !important;
+  /* 1º valor = horizontal (move para a esquerda), 2º = vertical */
+ 
+}
+
+.banners-container .banner-card:nth-child(4) {
+  /* controla o zoom da imagem */
+  background-size: 99% auto !important;
+  /* 1º valor = horizontal (move para a esquerda), 2º = vertical */
+  background-position: -70% 19% !important;
+ 
+}
+
+
+
+
+
+.banner-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Gradiente na parte inferior do banner */
+.banner-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), transparent);
+  z-index: 1;
+}
+
+/* Conteúdo centralizado na parte inferior */
+
+/* Contador no banner */
+.banner-card-content .countdown {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffdd57;
+  /* amarelo para destacar */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+
+/* ==== BANNERS: UNIFORMIZAÇÃO DE TEXTO ==== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.banner-card-content {
+  display: flex;
+  flex-wrap: wrap;
+  /* permite que o contador “quebre” linha */
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background: linear-gradient(to top,
+      rgba(20, 14, 4, 0.9),
+      rgba(20, 14, 4, 0.6) 40%,
+      transparent 80%);
+  border-radius: 0 0 20px 20px;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  /* Fonte, peso e sombra idênticos para todos os textos */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+
+.banner-card-content h2,
+.banner-card-content h3 {
+  margin: 0;
+  text-transform: uppercase;
+  color: #eee;
+
+  /* Herdar tamanho e peso do pai */
+  font-weight: inherit;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.banner-card-content .countdown {
+  order: -1;
+  /* faz o contador vir antes dos títulos */
+  flex-basis: 100%;
+  /* ocupa a largura toda para ficar numa linha só */
+  text-align: center;
+  margin: 0 0 8px 0;
+  /* afasta um pouco dos títulos */
+}
+
+/* ABOUT */
+.split-about {
+  padding: 100px 20px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.split-about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.about-img {
+  flex: 1 1 40%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.about-img img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease;
+}
+
+.about-img img:hover {
+  transform: scale(1.02);
+}
+
+.about-text {
+  flex: 1 1 50%;
+  color: #eee;
+}
+
+.about-text h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.6rem;
+  margin-bottom: 25px;
+  color: #fff;
+  letter-spacing: 3px;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  color: #ddd;
+}
+
+/* SOMENTE PARA O ABOUT */
+#about {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+
+#about h2 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #d6b654;
+  /* Dourado elegante */
+  margin-bottom: 20px;
+}
+
+#about p {
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+/* Fade-in animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe57;
+  box-shadow: 0 6px 20px rgba(30, 190, 87, 0.8);
+}
+
+.whatsapp-float img {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+
+:root {
+  --footer-bg: #121212;
+  --footer-text: #bdbdbd;
+  --footer-accent: #888;
+  --footer-hover: #fff;
+  --footer-line: #333;
+  --transition: 0.3s ease;
+}
+
+.footer-advanced {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+.footer-advanced__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px 20px;
+  position: relative;
+}
+
+/* Linha vertical sutil entre blocos */
+.footer-advanced__inner::before {
+  content: "";
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 50%;
+  width: 1px;
+  background: var(--footer-line);
+  opacity: 0.2;
+  transform: translateX(-50%);
+}
+
+/* Responsivo: remove linha central em mobile */
+@media (max-width: 768px) {
+  .footer-advanced__inner::before {
+    display: none;
+  }
+}
+
+/* Blocos */
+.footer-block {
+  padding: 0 20px;
+}
+
+.footer-block:first-child {
+  padding-left: 0;
+}
+
+.footer-block:last-child {
+  padding-right: 0;
+}
+
+/* Títulos */
+.footer-block h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  color: var(--footer-hover);
+  margin-bottom: 12px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-block h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--footer-hover);
+  transition: width var(--transition);
+}
+
+.footer-block h4:hover::after {
+  width: 100%;
+}
+
+/* Listas */
+.footer-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-block li {
+  margin-bottom: 8px;
+}
+
+.footer-block a {
+  color: var(--footer-text);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition);
+}
+
+.footer-block a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--footer-hover);
+  transition: width var(--transition);
+}
+
+.footer-block a:hover {
+  color: var(--footer-hover);
+}
+
+.footer-block a:hover::after {
+  width: 100%;
+}
+
+/* Social icons */
+.footer-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--footer-accent);
+  border-radius: 50%;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.footer-social a:hover {
+  border-color: var(--footer-hover);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.footer-social svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--footer-text);
+  transition: fill var(--transition);
+}
+
+.footer-social a:hover svg {
+  fill: var(--footer-hover);
+}
+
+/* Bottom */
+.footer-advanced__bottom {
+  border-top: 1px solid var(--footer-line);
+  text-align: center;
+  padding: 16px 0 24px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Ajuste mobile */
+@media (max-width: 768px) {
+  .footer-advanced__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-block {
+    padding: 0;
+  }
+}
+
+
+
+
+/* RESPONSIVE */
+
+/* Ajustes para tablets e desktops maiores */
+@media (min-width: 769px) {
+  .banners-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .banner-card {
+    flex: 1 1 calc(50% - 25px);
+    max-width: 490px;
+  }
+}
+
+/* Ajustes para telas médias e pequenas */
+@media (max-width: 768px) {
+  .intro-photo {
+    height: 500px;
+    /* aumenta a altura da área da imagem */
+  }
+
+  .intro-photo img {
+    object-position: center 20px;
+    transform: scale(1.4);
+    transition: transform 0.4s ease;
+  }
+
+
+
+  /* Navbar vertical para telas pequenas */
+  .navbar {
+    justify-content: center;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    display: none;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list a {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  /* About section */
+  .split-about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Intro photo menor para celular */
+  .intro-photo {
+    height: 400px;
+  }
+
+  /* Banner cards ficam coluna única */
+  .banners-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+   .banner-card {
+    /* largura menor: no lugar de 100%, use um % ou max-width fixo */
+    width: 90%;           /* ocupa 90% da tela */
+    max-width: 350px;     /* nunca passe de 350px */
+    /* altura maior: experimente até achar o ponto ideal */
+    height: 250px;        /* antes era 180px */
+  }
+  .banner-card-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* permite quebra de linha */
+    justify-content: center;
+    align-items: center;
+    /* reduz um pouco o espaçamento em mobile */
+  }
+
+  .banner-card-content .countdown {
+    order: -1;
+    /* traz o contador pra primeira linha */
+    flex-basis: 100%;
+    /* ocupa toda a largura */
+    text-align: center;
+    margin: 0 0 6px 0;
+    /* margem inferior menor */
+    font-size: 1rem;
+    /* tamanho ajustado ao mobile */
+  }
+
+  .banner-card-content h2,
+  .banner-card-content h3 {
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col {
+    min-width: auto;
+    width: 100%;
+    margin-bottom: 1px
+  }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 400px) {
+  .intro-caption {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+  }
+
+  banner-card-content {
+    gap: 6px;               /* diminui o espaço entre itens internos */
+  }
+  .banner-card-content h2,
+  .banner-card-content h3 {
+    letter-spacing: 1px;    /* reduz o espaçamento entre letras */
+    word-spacing: 0.2em;    /* reduz o espaçamento entre palavras */
+    font-size: 1rem;        /* opcional: ajustar tamanho pra ficar proporcional */
+  }
+
+}
+
+@media (max-width: 768px) {
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .footer-social a svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-block {
+    text-align: center;
+    /* Centraliza os títulos e textos do bloco também */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-advanced__inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-block {
+    margin-bottom: 20px;
+  }
+}
+
+/* Impede que o logo se torne link em outras páginas */
+.logo,
+.logo a {
+  text-decoration: none !important;
+  color: #ffffff !important;
+  cursor: default;
+}
