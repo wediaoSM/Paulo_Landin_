@@ -358,6 +358,8 @@ body {
   font-weight: inherit;
   font-size: 1.1rem;
   letter-spacing: 2px;
+  line-height: 1.2; /* diminui o espaço entre linhas */
+  text-align: center;
 }
 
 .banner-card-content .countdown {
